@@ -49,7 +49,7 @@ const ScalableImage = props => {
     }, [props, scalableHeight, scalableWidth]);
 
     const onProps = localProps => {
-        const { source } = localProps;
+        const { source, onError } = localProps;
         if (source.uri) {
             const sourceToUse = source.uri
                 ? source.uri
@@ -58,7 +58,7 @@ const ScalableImage = props => {
             Image.getSize(
                 sourceToUse,
                 (width, height) => adjustSize(width, height, props),
-                console.err
+                onError || console.error
             );
         }
         else {
